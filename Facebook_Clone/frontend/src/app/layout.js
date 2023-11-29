@@ -1,8 +1,6 @@
 import "./globals.css";
 import { Inter } from 'next/font/google'
-
 const inter = Inter({ subsets: ['latin'] })
-
 export const metadata = {
   title: 'Facebook_Clone',
   description: 'Facebook_Clone using react and Spring',
