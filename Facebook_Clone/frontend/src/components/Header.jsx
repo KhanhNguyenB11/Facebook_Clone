@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Image from 'next/image'
 import { CiSearch } from "react-icons/ci";
@@ -10,7 +11,10 @@ import { AiFillMessage } from "react-icons/ai";
 import { CgMenuGridO } from "react-icons/cg";
 import { AiFillBell } from "react-icons/ai";
 import { MdOutlineExpandMore } from "react-icons/md";
+import { useSession } from 'next-auth/react';
 function Header() {
+  const session = useSession();
+  console.log(session)
   return (
     <div className='bg-white flex items-center p-2 shadow-md top-0 sticky z-50 h-16'>
       <div className='flex min-w-fit '>
@@ -43,12 +47,11 @@ function Header() {
 
       </div>
       <div className='flex items-center justify-end min-w-fit space-x-2'>
-      <Image src="/Facebook_Logo.png" alt="Facebook_logo" width={40} height={40}/>
-      <p className='hidden xl:inline-flex font-bold  whitespace-nowrap p-3 max-w-xs'>Khanh</p>
       <CgMenuGridO size={20} className='hidden xl:inline-flex h-10 w-10 bg-gray-200 text-gray-600 rounded-full p-2 cursor-pointer hover:bg-gray-300'/>
       <AiFillMessage size={20} className='hidden xl:inline-flex h-10 w-10 bg-gray-200 text-gray-600 rounded-full p-2 cursor-pointer hover:bg-gray-300'/>
       <AiFillBell size={20} className='hidden xl:inline-flex h-10 w-10 bg-gray-200 text-gray-600 rounded-full p-2 cursor-pointer hover:bg-gray-300'/>
       <MdOutlineExpandMore size={20} className='hidden xl:inline-flex h-10 w-10 bg-gray-200 text-gray-600 rounded-full p-2 cursor-pointer hover:bg-gray-300'/>
+      <Image src={session?.data?.user?.image} alt="user_image" width={40} height={40} className='rounded-full'/>
       </div>
     </div>
   )
