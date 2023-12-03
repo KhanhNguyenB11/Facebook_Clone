@@ -4,6 +4,7 @@ import Sidebar from "@/components/Sidebar";
 import { useSession } from "next-auth/react";
 import Login from "@/components/Login";
 import Feed from "@/components/Feed";
+import RightSideBar from "@/components/RightSideBar";
 export default function Home() {
   const session = useSession();
   return (
@@ -14,6 +15,7 @@ export default function Home() {
           <main className="flex bg-gray-100 w-full">
             <Sidebar />
             <Feed />
+            <RightSideBar />
           </main>
         </>
       ) : (
