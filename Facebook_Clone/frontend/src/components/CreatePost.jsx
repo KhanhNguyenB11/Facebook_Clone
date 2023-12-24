@@ -4,12 +4,16 @@ import Image from "next/image";
 import { HiOutlineVideoCamera } from "react-icons/hi2";
 import { IoMdPhotos } from "react-icons/io";
 import { BsEmojiSmile } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { addPost } from "../../public/feature/postSlice";
+import axios from "axios";
 function CreatePost() {
-  const URL = "";
+  const URL = "http://localhost:8080/api/v1/post";
   const { data: session } = useSession();
   const inputRef = useRef(null);
   const hiddenFileInput = useRef(null);
   const [postImage, setPostImage] = useState(null);
+  const dispatch = useDispatch();
   function handlePhotoClick() {
     hiddenFileInput.current.click();
   }
@@ -31,18 +35,19 @@ function CreatePost() {
     const formData = new FormData();
     formData.append("file", postImage);
     formData.append("post", inputRef.current.value);
-    formData.append("userId", session?.user.id);
-    formData.append("userName", session?.user.name);
+    formData.append("id", session?.user.id);
+    formData.append("name", session?.user.name);
     formData.append("email", session?.user.email);
     formData.append("profilePic", session?.user.image);
     axios
-      .Post(URL, formData, {
+      .post(URL, formData, {
         headers: {
           Accept: "application/JSON",
         },
       })
       .then((res) => {
         inputRef.current.value = "";
+        dispatch(addPost(res.data));
         handleRemoveImg();
       })
       .catch((err) => {
@@ -68,7 +73,7 @@ function CreatePost() {
           />
           <button hidden onClick={handleSubmit}></button>
         </form>
-        <button hidden></button>
+        
       </div>
 
       {/* Show img if selected */}

@@ -2,6 +2,8 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import SessionProvider from "../components/SessionProvider";
 import { getServerSession } from "next-auth";
+
+import ReduxProvider from "@/ReduxProvider";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Facebook_Clone",
@@ -13,7 +15,9 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider session={session}>{children}</SessionProvider>
+        <SessionProvider session={session}>
+          <ReduxProvider>{children}</ReduxProvider>
+        </SessionProvider>
       </body>
     </html>
   );
