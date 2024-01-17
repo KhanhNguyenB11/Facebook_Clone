@@ -1,8 +1,9 @@
-package com.example.Facebook_Clone_Backend.service;
+package com.example.Facebook_Clone_Backend.service.serviceImpl;
 
 import com.example.Facebook_Clone_Backend.entity.PostEntity;
 import com.example.Facebook_Clone_Backend.model.Post;
 import com.example.Facebook_Clone_Backend.repository.PostEntityRepository;
+import com.example.Facebook_Clone_Backend.service.PostService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PostServiceImpl implements PostService{
-private PostEntityRepository postEntityRepository;
+public class PostServiceImpl implements PostService {
+private final PostEntityRepository postEntityRepository;
 
     public PostServiceImpl(PostEntityRepository postEntityRepository) {
         this.postEntityRepository = postEntityRepository;

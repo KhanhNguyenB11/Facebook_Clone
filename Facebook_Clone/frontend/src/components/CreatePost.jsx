@@ -5,7 +5,7 @@ import { HiOutlineVideoCamera } from "react-icons/hi2";
 import { IoMdPhotos } from "react-icons/io";
 import { BsEmojiSmile } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { addPost } from "../../public/feature/postSlice";
+import { addPost } from "../feature/postSlice";
 import axios from "axios";
 function CreatePost() {
   const URL = "http://localhost:8080/api/v1/post";

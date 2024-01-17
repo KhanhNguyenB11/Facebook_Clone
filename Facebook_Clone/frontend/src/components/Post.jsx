@@ -3,10 +3,11 @@ import Image from "next/image";
 import { FiThumbsUp } from "react-icons/fi";
 import { FaRegComment } from "react-icons/fa6";
 import { PiShareFatLight } from "react-icons/pi";
+import Comment from "./Comment";
 function Post({ post }) {
   return (
     <div className="flex flex-col" key={post?.id}>
-      <div className="bg-white mt-6 rounded-md p-2">
+      <div className="bg-white rounded-md mt-6 p-2">
         <div className="flex items-center space-x-2">
           <img
             src={post?.profilePic}
@@ -26,7 +27,7 @@ function Post({ post }) {
         </div>
       )}
       {/* footer */}
-      <div className="flex items-center bg-white p-3">
+      <div className="flex items-center bg-white p-3 border border-gray-200 border-l-0 border-r-0 pb-2">
         <div className="flex items-center justify-center flex-grow space-x-1 hover:bg-gray-200 transition-colors duration-300 rounded-xl cursor-pointer">
           <FiThumbsUp className="h-4" />
           <p className="text-sm sm:text-base">Like</p>
@@ -39,6 +40,12 @@ function Post({ post }) {
           <PiShareFatLight className="h-4" />
           <p className="text-sm sm:text-base">Share</p>
         </div>
+      </div>
+      {/* Comment section */}
+      <div className="pt-2 bg-white">
+      <Comment></Comment>
+      <Comment></Comment>
+        
       </div>
     </div>
   );
