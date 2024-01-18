@@ -9,16 +9,19 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "friend_requests")
 public class FriendRequestEntity {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @Column(columnDefinition = "VARCHAR(36)")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @ManyToOne
-    @JoinColumn(name = "request_sender_id")
-    private UserEntity requestSender;
+    @JoinColumn(name = "sender_id")
+    private UserEntity sender;
+
     @ManyToOne
-    @JoinColumn(name = "request_receiver_id")
-    private UserEntity requestReceiver;
-    private String status;
+    @JoinColumn(name = "receiver_id")
+    private UserEntity receiver;
+
+    private boolean accepted;
 }

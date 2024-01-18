@@ -12,10 +12,10 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(generator = "uuid")
-    @Column(columnDefinition = "VARCHAR(36)")
     private String id;
 
     @Column(unique = true)
@@ -24,8 +24,8 @@ public class UserEntity {
     private String gender;
 
     @Column(unique = true)
-
     private String email;
+
     private String firstName;
     private String lastName;
     private String phone;
@@ -36,13 +36,14 @@ public class UserEntity {
     private String address;
     private String timeStamp;
 
-    @ManyToMany
-    private List<UserEntity> friends;
 
-    @OneToMany
-    private List<FriendRequestEntity> friendRequests;
+    @OneToMany(mappedBy = "receiver")
+    private List<FriendRequestEntity> receivedFriendRequests ;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "sender")
     private List<FriendRequestEntity> sentFriendRequests;
+
+    @OneToMany(mappedBy = "user_comment")
+    private List<CommentEntity> commentsList;
 
 }

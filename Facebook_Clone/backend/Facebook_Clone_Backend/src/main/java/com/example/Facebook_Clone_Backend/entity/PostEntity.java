@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "posts")
@@ -26,4 +28,7 @@ public class PostEntity {
     private String img;
     private  String profilePic;
     private String timeStamp;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CommentEntity> comments;
 }

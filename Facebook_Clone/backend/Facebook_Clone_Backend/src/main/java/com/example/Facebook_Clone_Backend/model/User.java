@@ -1,7 +1,7 @@
 package com.example.Facebook_Clone_Backend.model;
 
 import com.example.Facebook_Clone_Backend.entity.FriendRequestEntity;
-import com.example.Facebook_Clone_Backend.entity.UserEntity;
+//import com.example.Facebook_Clone_Backend.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +27,7 @@ public class User {
     private String profilePic;
     private String address;
 
-    private List<UserEntity> friends;
+//    private List<UserEntity> friends;
 
     private List<FriendRequestEntity> friendRequests;
 
