@@ -10,12 +10,12 @@ function Post({ post }) {
       <div className="bg-white rounded-md mt-6 p-2">
         <div className="flex items-center space-x-2">
           <img
-            src={post?.profilePic}
+            src={post?.user?.img}
             alt=""
             className="rounded-full w-10 h-10"
           />
           <div>
-            <p className="font-medium">{post.name}</p>
+            <p className="font-medium">{post.user?.userName}</p>
             <p className="text-sm text-gray-500">{post?.timeStamp}</p>
           </div>
         </div>

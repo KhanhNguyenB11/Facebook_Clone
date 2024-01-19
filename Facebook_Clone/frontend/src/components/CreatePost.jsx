@@ -35,10 +35,8 @@ function CreatePost() {
     const formData = new FormData();
     formData.append("file", postImage);
     formData.append("post", inputRef.current.value);
-    formData.append("id", session?.user.id);
-    formData.append("name", session?.user.name);
     formData.append("email", session?.user.email);
-    formData.append("profilePic", session?.user.image);
+  
     axios
       .post(URL, formData, {
         headers: {
