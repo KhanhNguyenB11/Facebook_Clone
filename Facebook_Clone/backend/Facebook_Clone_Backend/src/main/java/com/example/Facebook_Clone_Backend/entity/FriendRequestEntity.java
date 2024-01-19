@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "friend_requests")
 public class FriendRequestEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "sender_id")

@@ -16,20 +16,13 @@ import java.util.List;
 public class User {
     private String id;
     private String userName;
-    private String password;
-    private String gender;
+
     private String email;
-    private String firstName;
-    private String lastName;
-    private String phone;
 
     private String img;
     private String profilePic;
-    private String address;
 
-//    private List<UserEntity> friends;
+    private String timeStamp;
 
-    private List<FriendRequestEntity> friendRequests;
-
-    private List<FriendRequestEntity> sentFriendRequests;
+    private List<User> friends;
 }

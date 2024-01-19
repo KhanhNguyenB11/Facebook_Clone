@@ -20,30 +20,21 @@ public class UserEntity {
 
     @Column(unique = true)
     private String userName;
-    private String password;
-    private String gender;
 
     @Column(unique = true)
     private String email;
 
-    private String firstName;
-    private String lastName;
-    private String phone;
-
     @Lob
     private String img;
     private String profilePic;
-    private String address;
     private String timeStamp;
 
 
-    @OneToMany(mappedBy = "receiver")
-    private List<FriendRequestEntity> receivedFriendRequests ;
-
-    @OneToMany(mappedBy = "sender")
-    private List<FriendRequestEntity> sentFriendRequests;
-
     @OneToMany(mappedBy = "user_comment")
     private List<CommentEntity> commentsList;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<UserEntity> friends;
+
 
 }

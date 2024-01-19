@@ -1,7 +1,9 @@
 package com.example.Facebook_Clone_Backend.service.serviceImpl;
 
 import com.example.Facebook_Clone_Backend.entity.PostEntity;
+import com.example.Facebook_Clone_Backend.entity.UserEntity;
 import com.example.Facebook_Clone_Backend.model.Post;
+import com.example.Facebook_Clone_Backend.model.User;
 import com.example.Facebook_Clone_Backend.repository.PostEntityRepository;
 import com.example.Facebook_Clone_Backend.service.PostService;
 import org.springframework.beans.BeanUtils;
@@ -34,7 +36,6 @@ private final PostEntityRepository postEntityRepository;
             post.setId(postEntity.getId());
             post.setFile(null);
             post.setImg(postEntity.getImg());
-
         }
         catch (Exception e){
             throw new Exception("Could not save Post "+ e);
@@ -50,14 +51,13 @@ private final PostEntityRepository postEntityRepository;
                 .map(postEntity ->
             Post.builder()
                     .id(postEntity.getId())
-                    .timeStamp(postEntity.getTimeStamp())
-                    .name(postEntity.getName())
-                    .email(postEntity.getEmail())
                     .post(postEntity.getPost())
                     .img(postEntity.getImg())
-                    .profilePic(postEntity.getProfilePic())
+                    .timeStamp(postEntity.getTimeStamp())
+                    .user(postEntity.getUser())
                     .build())
                 .collect(Collectors.toList());
                 return postList;
     }
+
 }

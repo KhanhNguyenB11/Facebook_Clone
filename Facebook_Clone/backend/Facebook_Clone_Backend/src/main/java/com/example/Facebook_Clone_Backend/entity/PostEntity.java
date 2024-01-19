@@ -22,13 +22,17 @@ public class PostEntity {
     private  String id;
     @Lob
     private  String post;
-    private  String name;
-    private  String email;
     @Lob
     private String img;
-    private  String profilePic;
+
     private String timeStamp;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "post")
     private List<CommentEntity> comments;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private UserEntity user;
+
+    @ManyToMany
+    private List<UserEntity> userLiked;
 }
