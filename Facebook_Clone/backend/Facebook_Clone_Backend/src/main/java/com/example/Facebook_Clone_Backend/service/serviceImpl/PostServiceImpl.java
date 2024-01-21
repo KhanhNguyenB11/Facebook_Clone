@@ -55,9 +55,12 @@ private final PostEntityRepository postEntityRepository;
                     .img(postEntity.getImg())
                     .timeStamp(postEntity.getTimeStamp())
                     .user(postEntity.getUser())
+                    .comments(null)
+                    .commentCount(postEntity.getCommentCount())
                     .build())
                 .collect(Collectors.toList());
                 return postList;
+
     }
 
 }

@@ -17,9 +17,12 @@ public class Comment {
     private String id;
     private String content;
 
-    private UserEntity user_comment;
+    private String userName;
 
     private int likes;
 
-    private PostEntity post;
+    private String postId;
+    private String timeStamp;
+    private String userEmail;
+    private String profilePic;
 }

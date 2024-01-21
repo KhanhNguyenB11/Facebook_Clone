@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class CommentEntity {
     @Id
     @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid",strategy = "uuid2")
     private String id;
     private String content;
 
@@ -23,4 +25,6 @@ public class CommentEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private PostEntity post;
+
+    private String timeStamp;
 }

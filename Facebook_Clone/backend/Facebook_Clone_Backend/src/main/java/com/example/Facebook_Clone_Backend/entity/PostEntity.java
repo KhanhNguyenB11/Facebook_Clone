@@ -27,6 +27,10 @@ public class PostEntity {
 
     private String timeStamp;
 
+    // Updated field to store the number of comments
+    @Transient
+    private int commentCount;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "post")
     private List<CommentEntity> comments;
 
@@ -35,4 +39,12 @@ public class PostEntity {
 
     @ManyToMany
     private List<UserEntity> userLiked;
+
+    public  int getCommentCount() {
+        return this.comments != null ? this.comments.size() : 0;
+    }
+
+    public void updateCommentCount() {
+        this.commentCount = getCommentCount();
+    }
 }

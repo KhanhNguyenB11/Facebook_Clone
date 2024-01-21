@@ -36,7 +36,7 @@ function CreatePost() {
     formData.append("file", postImage);
     formData.append("post", inputRef.current.value);
     formData.append("email", session?.user.email);
-  
+    formData.append("timeStamp", new Date().toISOString());
     axios
       .post(URL, formData, {
         headers: {
@@ -67,7 +67,7 @@ function CreatePost() {
             className="rounded-full h-12 flex-grow flex px-4 hover:bg-gray-200 transition-all duration-300 focus:outline-none font-md bg-gray-100"
             type="text"
             ref={inputRef}
-            placeholder={`What's on your mind,${session?.user?.name}?`}
+            placeholder={`What's on your mind, ${session?.user?.name}?`}
           />
           <button hidden onClick={handleSubmit}></button>
         </form>

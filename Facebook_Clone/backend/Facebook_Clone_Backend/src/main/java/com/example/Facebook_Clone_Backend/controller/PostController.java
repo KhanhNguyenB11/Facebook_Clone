@@ -28,6 +28,7 @@ public class PostController {
         String strPost = requestParam.get("post");
         String email = requestParam.get("email");
         String file = requestParam.get("file");
+        String timeStamp = requestParam.get("timeStamp");
         User user = userService.getUser(email);
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(user,userEntity);
@@ -35,7 +36,7 @@ public class PostController {
                 .post(strPost)
                 .user(userEntity)
                 .file(file)
-                .timeStamp(new Date().toString())
+                .timeStamp(timeStamp)
                 .build();
 
         post = postService.addPost(post);

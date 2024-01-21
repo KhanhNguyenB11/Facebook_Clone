@@ -30,9 +30,6 @@ public class UserEntity {
     private String timeStamp;
 
 
-    @OneToMany(mappedBy = "user_comment")
-    private List<CommentEntity> commentsList;
-
     @ManyToMany(cascade = CascadeType.ALL)
     private List<UserEntity> friends;
 
