@@ -12,6 +12,22 @@ export const postSlice = createSlice({
       state.value.push(...action.payload);
       console.log(state.value);
     },
+    likePost: (state, action) => {
+      const postId = action.payload;
+      const postIndex = state.value.findIndex((post) => post.id === postId);
+      if (postIndex !== -1) {
+        state.value[postIndex].likeCount++;
+        state.value[postIndex].userLiked = true;
+      }
+    },
+    unlikePost: (state, action) => {
+      const postId = action.payload;
+      const postIndex = state.value.findIndex((post) => post.id === postId);
+      if (postIndex !== -1) {
+        state.value[postIndex].likeCount--;
+        state.value[postIndex].userLiked = false;
+      }
+    },
     addComment: (state, action) => {
         const postId = action.payload.postId;
         const postIndex = state.value.findIndex((post) => post.id === postId);
@@ -34,8 +50,6 @@ export const postSlice = createSlice({
           state.value = updatedPosts;
         }
       
-        console.log(state.value);
-        console.log(action.payload);
       },
       addMultipleComment: (state, action) => {
         if(action.payload.length > 0){
@@ -44,11 +58,10 @@ export const postSlice = createSlice({
             post.comments = [];
           }
           post.comments = [...post.comments, ...action.payload];
-          
         }
       },
   },
 });
-export const { addAllPost, addPost, addComment, addMultipleComment } = postSlice.actions;
+export const { addAllPost, addPost, addComment, addMultipleComment,likePost, unlikePost } = postSlice.actions;
 export const selectPost = (state) => state.post.value;
 export default postSlice.reducer;

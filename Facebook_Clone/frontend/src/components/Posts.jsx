@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addAllPost, selectPost } from "../feature/postSlice";
+import { useSession } from "next-auth/react";
+
 import Post from "./Post";
 import axios from "axios";
 
 function Posts() {
-  const URL = "http://localhost:8080/api/v1/post";
+  const session = useSession();
+  const URL = `http://localhost:8080/api/v1/post?userEmail=${session.data.user?.email}`;
   const dispatch = useDispatch();
   const [load, setLoad] = useState(false);
   useEffect(() => {

@@ -31,6 +31,9 @@ public class PostEntity {
     @Transient
     private int commentCount;
 
+    @Transient
+    private int likeCount;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "post")
     private List<CommentEntity> comments;
 
@@ -44,7 +47,7 @@ public class PostEntity {
         return this.comments != null ? this.comments.size() : 0;
     }
 
-    public void updateCommentCount() {
-        this.commentCount = getCommentCount();
+    public int getLikeCount() {
+        return this.userLiked != null ? this.userLiked.size() : 0;
     }
 }

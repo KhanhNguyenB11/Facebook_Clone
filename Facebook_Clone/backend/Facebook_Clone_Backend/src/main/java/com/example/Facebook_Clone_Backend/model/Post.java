@@ -25,4 +25,6 @@ public class Post {
     private UserEntity user;
     private List<Comment> comments;
     private int commentCount;
+    private int likeCount;
+    private boolean userLiked;
 }

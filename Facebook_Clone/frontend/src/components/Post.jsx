@@ -1,6 +1,7 @@
-import React from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { FiThumbsUp } from "react-icons/fi";
+import { FaRegThumbsUp } from "react-icons/fa";
+import { FaThumbsUp } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa6";
 import { PiShareFatLight } from "react-icons/pi";
 import Comment from "./Comment";
@@ -8,18 +9,40 @@ import CreateComment from "./CreateComment";
 import timeFormat from "@/timeFormat";
 import { API_URL } from "@/Request";
 import { useDispatch } from "react-redux";
-import { addMultipleComment } from "../feature/postSlice";
+import { addMultipleComment,likePost,unlikePost } from "../feature/postSlice";
 import axios from "axios";
 function Post({ post }) {
+  const [liked, setLiked] = useState(post.userLiked);
   const dispatch = useDispatch();
   function getComments() {
-    axios.get(`${API_URL}/comment?postId=${post.id}`)
-    .then(res=>{
-      dispatch(addMultipleComment(res.data));
-    })
-    .catch(err=>{
-      console.log(err);
-    })
+    axios
+      .get(`${API_URL}/comment?postId=${post.id}`)
+      .then((res) => {
+        dispatch(addMultipleComment(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  function hanldeLikePost() {
+    axios
+      .post(`${API_URL}/post/${post.id}/like?userEmail=${post.user?.email}`)
+      .then((res) => {
+        dispatch(likePost(post.id))
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  function handleUnlikePost() {
+    axios
+      .post(`${API_URL}/post/${post.id}/unlike?userEmail=${post.user?.email}`)
+      .then((res) => {
+        dispatch(unlikePost(post.id))
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   return (
     <div className="flex flex-col" key={post?.id}>
@@ -32,7 +55,9 @@ function Post({ post }) {
           />
           <div>
             <p className="font-medium">{post.user?.userName}</p>
-            <p className="text-sm text-gray-500">{timeFormat(post?.timeStamp)}</p>
+            <p className="text-sm text-gray-500">
+              {timeFormat(post?.timeStamp)}
+            </p>
           </div>
         </div>
         <p className="py-2">{post?.post}</p>
@@ -44,22 +69,40 @@ function Post({ post }) {
       )}
       {/* post likes comments shares stat */}
       <div className="flex justify-between bg-white p-2 text-gray-500 text-md">
-        <div className="grow">100 Likes</div>
+        <div className="grow">
+          {post.likeCount > 1
+            ? `${post.likeCount} likes`
+            : `${post.likeCount} like`}{" "}
+        </div>
         <div className="flex gap-3">
-          <p>{post.commentCount > 1 ? `${post.commentCount} comments`:`${post.commentCount} comment`} </p>
+          <p>
+            {post.commentCount > 1
+              ? `${post.commentCount} comments`
+              : `${post.commentCount} comment`}{" "}
+          </p>
           <p>12 shares</p>
         </div>
-
       </div>
       {/* footer */}
       <div className="flex items-center bg-white p-3 border border-gray-200 border-l-0 border-r-0 pb-2">
         <div className="flex items-center justify-center flex-grow space-x-1 hover:bg-gray-200 transition-colors duration-300 rounded-xl cursor-pointer">
-          <FiThumbsUp className="h-4" />
-          <p className="text-sm sm:text-base">Like</p>
+          {post.userLiked ? (
+            <>
+              <FaThumbsUp className="h-4" onClick={handleUnlikePost} />
+              <p className="text-sm sm:text-base">Unlike</p>
+            </>
+          ) : (
+            <>
+              <FaRegThumbsUp className="h-4" onClick={hanldeLikePost} />
+              <p className="text-sm sm:text-base">Like</p>
+            </>
+          )}
         </div>
         <div className="flex items-center justify-center space-x-1 hover:bg-gray-200 transition-colors duration-300 flex-grow rounded-xl cursor-pointer">
           <FaRegComment className="h-4" />
-          <p className="text-sm sm:text-base" onClick={getComments}>Comment</p>
+          <p className="text-sm sm:text-base" onClick={getComments}>
+            Comment
+          </p>
         </div>
         <div className="flex items-center justify-center space-x-1 hover:bg-gray-200 transition-colors duration-300 flex-grow rounded-xl cursor-pointer">
           <PiShareFatLight className="h-4" />

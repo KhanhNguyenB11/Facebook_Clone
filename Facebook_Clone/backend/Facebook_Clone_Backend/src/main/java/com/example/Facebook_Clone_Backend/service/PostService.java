@@ -9,5 +9,8 @@ public interface PostService {
 
     Post addPost(Post post) throws Exception;
 
-    List<Post> getAllPost();
+    List<Post> getAllPost(String userEmail);
+
+    void likePost(String postId,String userId);
+    void unlikePost(String postId,String userId);
 }
