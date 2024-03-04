@@ -25,4 +25,7 @@ public class Comment {
     private String timeStamp;
     private String userEmail;
     private String profilePic;
+
+    private int likedCount;
+    private boolean userLiked;
 }

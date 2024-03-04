@@ -18,13 +18,22 @@ public class CommentController {
     }
 
     @GetMapping
-    public List<Comment> getComments(@RequestParam String postId){
-        List<Comment> comments = commentService.getCommentsByPostId(postId);
+    public List<Comment> getComments(@RequestParam String postId,@RequestParam String sort, @RequestParam int current,@RequestParam String userEmail){
+        List<Comment> comments = commentService.getCommentsByPostId(postId,sort,current,userEmail);
         return comments;
     }
     @PostMapping
     public Comment addComment(@RequestBody Comment comment){
         return commentService.addComment(comment);
 
+    }
+    @PostMapping("/{commentId}/like")
+    public Comment likeComment(@PathVariable String commentId,@RequestParam String userEmail){
+        return commentService.likeComment(commentId,userEmail);
+    }
+
+    @PostMapping("/{commentId}/unlike")
+    public Comment unlikeComment(@PathVariable String commentId,@RequestParam String userEmail){
+        return commentService.unlikeComment(commentId,userEmail);
     }
 }

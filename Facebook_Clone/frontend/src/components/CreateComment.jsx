@@ -46,7 +46,7 @@ function CreateComment({ postId }) {
         <input
           type="text"
           placeholder="Add a comment..."
-          className="bg-transparent outline-none ml-2 p-2 w-full hover:bg-gray-200 rounded-lg transition-all duration-200 ease-in-out "
+          className="bg-transparent outline-none ml-2 p-2 w-full focus:bg-gray-200 rounded-lg transition-all duration-200 ease-in-out "
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           onKeyDown={(e) => {

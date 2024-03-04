@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -21,10 +23,16 @@ public class CommentEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     private UserEntity user_comment;
 
-    private int likes;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<UserEntity> likes;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private PostEntity post;
 
     private String timeStamp;
+
+    public int getLikeCount(){
+        return this.likes != null ? likes.size() : 0;
+    }
+
 }

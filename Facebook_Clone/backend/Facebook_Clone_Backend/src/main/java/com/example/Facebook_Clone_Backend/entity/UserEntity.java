@@ -29,10 +29,8 @@ public class UserEntity {
     private String profilePic;
     private String timeStamp;
 
-
     @ManyToMany(cascade = CascadeType.ALL)
     private List<UserEntity> friends;
-
 
 
 }
