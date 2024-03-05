@@ -68,13 +68,28 @@ export const postSlice = createSlice({
         if (postIndex !== -1) {
           const commentIndex = state.value[postIndex].comments.findIndex((comment) => comment.id === commentId);
           if (commentIndex !== -1) {
+            console.log("here")
             state.value[postIndex].comments[commentIndex].likeCount++;
             state.value[postIndex].comments[commentIndex].userLiked = true;
           }
         }
       },
+      unlikeComment: (state, action) => {
+        const postId = action.payload.postId;
+        const commentId = action.payload.commentId;
+        console.log(postId);
+        console.log(commentId)
+        const postIndex = state.value.findIndex((post) => post.id === postId);
+        if (postIndex !== -1) {
+          const commentIndex = state.value[postIndex].comments.findIndex((comment) => comment.id === commentId);
+          if (commentIndex !== -1) {
+            state.value[postIndex].comments[commentIndex].likeCount--;
+            state.value[postIndex].comments[commentIndex].userLiked = false;
+          }
+        }
+      },
   },
 });
-export const { addAllPost, addPost, addComment, addMultipleComment,likePost, unlikePost } = postSlice.actions;
+export const { addAllPost, addPost, addComment, addMultipleComment,likePost, unlikePost,likeComment,unlikeComment } = postSlice.actions;
 export const selectPost = (state) => state.post.value;
 export default postSlice.reducer;

@@ -4,20 +4,41 @@ import timeFormat from "@/timeFormat";
 import axios from "axios";
 import { API_URL } from "@/Request";
 import { useSession } from "next-auth/react";
+import { likeComment, unlikeComment } from "@/feature/postSlice";
+import { useDispatch } from "react-redux";
 function Comment({ comment }) {
+  const dispatch = useDispatch();
   const { data: session } = useSession();
   const currentUser = session.user;
   function handleLikeComment() {
     const action = comment.userLiked ? "unlike" : "like";
-    axios.post(`${API_URL}/comment/${comment.id}/${action}?userEmail=${currentUser.email}`)
-    .then(response => {
-      // Handle successful response if needed
-      console.log('Comment liked successfully:', response.data);
-    })
-    .catch(error => {
-      // Handle error
-      console.error('Error liking comment:', error);
-    });
+    if (action === "like") {
+      dispatch(
+        likeComment({
+          commentId: comment.id,
+          postId: comment.postId,
+        })
+      );
+    } else {
+      dispatch(
+        unlikeComment({
+          commentId: comment.id,
+          postId: comment.postId,
+        })
+      );
+    }
+    axios
+      .post(
+        `${API_URL}/comment/${comment.id}/${action}?userEmail=${currentUser.email}`
+      )
+      .then((response) => {
+        // Handle successful response if needed
+        console.log(`Comment ${action} successfully:`, response.data);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error liking comment:", error);
+      });
   }
   return (
     <>
